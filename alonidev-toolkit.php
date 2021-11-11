@@ -3,9 +3,9 @@
 /*
   Plugin Name: AloniDev Toolkit
   Plugin URI: http://www.alonidev.com
-  Version: 1.3.0
+  Version: 1.5.0
   Author: Guy Aloni
-  Text Domain: ecb
+  Text Domain: alonidevtoolkit
  */
 
 $plugin_vars = [
@@ -37,4 +37,5 @@ add_filter('pre_set_site_transient_update_plugins', function ($transient) use ($
 
 //////////////////////////
 
-AloniDevToolkit\Services\ComingSoonService::init_service();
+
+AloniDevToolkit\Services\ComingSoonService::init_service(__DIR__);
