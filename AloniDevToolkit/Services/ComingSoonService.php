@@ -16,7 +16,12 @@ namespace AloniDevToolkit\Services {
 				$paths[] = $plugin_root_dir . '/acf-json';
 				return $paths;
 			});
+			add_action('init', function () {
+				self::check_coming_soon();
+			});
+		}
 
+		public static function check_coming_soon() {
 			self::$enable_coming_soon = get_field("enable_coming_soon", "alonidev-toolkit");
 			if (self::$enable_coming_soon) {
 				self::$current_url = self::get_current_url();
