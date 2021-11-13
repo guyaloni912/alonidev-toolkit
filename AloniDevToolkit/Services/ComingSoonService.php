@@ -17,17 +17,20 @@ namespace AloniDevToolkit\Services {
 				return $paths;
 			});
 			add_action('init', function () {
-				self::check_coming_soon();
+				self::do_coming_soon();
 			});
 		}
 
-		public static function check_coming_soon() {
+		public static function do_coming_soon() {
 			self::$enable_coming_soon = get_field("enable_coming_soon", "alonidev-toolkit");
 			if (self::$enable_coming_soon) {
 				self::$current_url = self::get_current_url();
 				self::$redirect_url = self::get_redirect_url();
 				self::$passthrough_parameter = get_field("passthrough_parameter", "alonidev-toolkit");
 
+				if (!isset($_COOKIE["passthrough"])) {
+					setcookie('passthrough', "false", 0, "/");
+				}
 				if (self::is_safe() == false) {
 					header("Location: " . self::$redirect_url);
 					exit();
@@ -42,7 +45,11 @@ namespace AloniDevToolkit\Services {
 				return true;
 			}
 			if (isset($_COOKIE["passthrough"]) && $_COOKIE["passthrough"] == self::$passthrough_parameter) return true;
-			if (is_user_logged_in() || self::$current_url == '/wp-login.php/' || self::$current_url == '/wp-admin/') return true;
+			if (is_user_logged_in() ||
+					self::$current_url == '/wp-login.php/' ||
+					self::$current_url == '/wp-admin/' ||
+					self::$current_url == '/index.php/' ||
+					self::$current_url == '/wp-admin/admin-ajax.php/') return true;
 			if (self::is_external(self::$redirect_url) == false && self::$current_url == self::$redirect_url) return true;
 			return false;
 		}

@@ -3,7 +3,7 @@
 /*
   Plugin Name: AloniDev Toolkit
   Plugin URI: http://www.alonidev.com
-  Version: 1.5.0
+  Version: 1.6.0
   Author: Guy Aloni
   Text Domain: alonidevtoolkit
  */
@@ -37,5 +37,8 @@ add_filter('pre_set_site_transient_update_plugins', function ($transient) use ($
 
 //////////////////////////
 
+use AloniDevToolkit\Services\RequestHandlerService;
+use AloniDevToolkit\Services\ComingSoonService;
 
-AloniDevToolkit\Services\ComingSoonService::init_service(__DIR__);
+ComingSoonService::init_service(__DIR__);
+RequestHandlerService::init_service();
