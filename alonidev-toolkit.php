@@ -3,7 +3,7 @@
 /*
   Plugin Name: AloniDev Toolkit
   Plugin URI: http://www.alonidev.com
-  Version: 1.7.0
+  Version: 1.8.0
   Author: Guy Aloni
   Text Domain: alonidevtoolkit
  */

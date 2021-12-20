@@ -62,8 +62,8 @@ namespace AloniDevToolkit\Services {
 
 		private static function get_redirect_url() {
 			$url = get_field("redirect_url", "alonidev-toolkit");
-			$site_url = trim(site_url(), "/");
-			if (stripos($url, $site_url) === 0) $url = substr($url, strlen($site_url));
+			//$site_url = trim(site_url(), "/");
+			//if (stripos($url, $site_url) === 0) $url = substr($url, strlen($site_url));
 			if (!self::is_external($url)) {
 				$url = "/" . trim(parse_url($url)["path"], "/") . "/";
 			}
