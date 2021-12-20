@@ -32,7 +32,10 @@ namespace AloniDevToolkit\Services {
 					setcookie('passthrough', "false", 0, "/");
 				}
 				if (self::is_safe() == false) {
-					header("Location: " . self::$redirect_url);
+					$redirect = "";
+					if (get_field('force_primary_domain', 'alonidev-toolkit') == true) $redirect .= trim(site_url(), "/");
+					$redirect .= self::$redirect_url;
+					header("Location: " . $redirect);
 					exit();
 				}
 			}
@@ -62,8 +65,8 @@ namespace AloniDevToolkit\Services {
 
 		private static function get_redirect_url() {
 			$url = get_field("redirect_url", "alonidev-toolkit");
-			//$site_url = trim(site_url(), "/");
-			//if (stripos($url, $site_url) === 0) $url = substr($url, strlen($site_url));
+			$site_url = trim(site_url(), "/");
+			if (stripos($url, $site_url) === 0) $url = substr($url, strlen($site_url));
 			if (!self::is_external($url)) {
 				$url = "/" . trim(parse_url($url)["path"], "/") . "/";
 			}
